@@ -1,0 +1,2213 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample server Pfizer server.  You can find out more about Pfizer at [https://www.pfizer.com](https://www.pfizer.com).",
+    "version": "1.0.0",
+    "title": "Swagger Pfizer",
+    "contact": {
+      "email": "apiteam@pfizer.io"
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
+  "host": "localhost:5000",
+  "_host": "18.223.64.2/api",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "operationId": "login",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "We need to get token from deveferate.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/loginLoad"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Invalid code provided."
+          }
+        }
+      }
+    },
+    "/app_oauth": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "operationId": "appOauth",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppAuthLoad"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Invalid NTID value."
+          }
+        }
+      }
+    },
+    "/get_all_prediction": {
+      "get": {
+        "tags": [
+          "Prediction"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "getAllPrediction",
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "404": {
+            "description": "Prediction not found"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/get_prediction_by_id/{predictionID}": {
+      "get": {
+        "tags": [
+          "Prediction"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "findPredictionById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "predictionID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/create_prediction": {
+      "post": {
+        "tags": [
+          "Prediction"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "createPrediction",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreatePredictionLoad"
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/update_prediction": {
+      "post": {
+        "tags": [
+          "Prediction"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "updatePrediction",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdatePredictionLoad"
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/save_review_for_prediction": {
+      "post": {
+        "tags": [
+          "Prediction"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "saveRreviewforPrediction",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/save_review_load"
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/add_prediction_bookmark": {
+      "post": {
+        "tags": [
+          "Prediction"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "addPredictionBookmark",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddPredictionBookmarkLoad"
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/check_unique_prediction_title": {
+      "post": {
+        "tags": [
+          "Prediction"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "checkUniquePredictionTitle",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "description": "Need code to get token.",
+              "properties": {
+                "Title": {
+                  "type": "string",
+                  "example": "Test Prediction"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/get_all_notification_by_user_name": {
+      "post": {
+        "tags": [
+          "Notification"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "getAllNotificationbyUserName",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "description": "Need code to get token.",
+              "properties": {
+                "UserName": {
+                  "type": "string",
+                  "example": "jadyas"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/get_cipher_saved_search_by_user": {
+      "post": {
+        "tags": [
+          "Cipher"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "getCipherSavedSearchbyUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "description": "Need code to get token.",
+              "properties": {
+                "UserName": {
+                  "type": "string",
+                  "example": "green_p@pfizer.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/get_all_prediction_by_braintrust_user": {
+      "post": {
+        "tags": [
+          "Prediction"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "getAllPredictionByBraintrustUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "description": "Need code to get token.",
+              "properties": {
+                "BrainTrustUsers": {
+                  "type": "string",
+                  "example": "Sanket Jaydar"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/set_archive_notification_by_Id": {
+      "post": {
+        "tags": [
+          "Notification"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "setArchiveNotificationById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "description": "Need code to get token.",
+              "properties": {
+                "NotificationID": {
+                  "type": "string",
+                  "example": "049c1494-a75e-11eb-b814-06547b7882a8"
+                },
+                "IsArchive": {
+                  "type": "string",
+                  "example": "True"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/set_read_notification_by_Id": {
+      "post": {
+        "tags": [
+          "Notification"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "setReadNotificationById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "description": "Need code to get token.",
+              "properties": {
+                "NotificationID": {
+                  "type": "string",
+                  "example": "049c1494-a75e-11eb-b814-06547b7882a8"
+                },
+                "IsArchive": {
+                  "type": "string",
+                  "example": "True"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/archive_all_notification_by_userName": {
+      "post": {
+        "tags": [
+          "Notification"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "archiveAllNotificationByUserName",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "description": "Need code to get token.",
+              "properties": {
+                "UserName": {
+                  "type": "string",
+                  "example": "jadyas"
+                },
+                "IsArchive": {
+                  "type": "string",
+                  "example": "True"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/save_notification": {
+      "post": {
+        "tags": [
+          "Notification"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "saveNotification",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "NotificationBy": {
+                    "type": "string",
+                    "example": "Anchit Rao"
+                  },
+                  "NotificationFor": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": "goswag01"
+                    }
+                  },
+                  "NotificationMessage": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "PredictionID": {
+                    "type": "string",
+                    "example": "3c23806f-a684-11eb-a768-06547b7882a8"
+                  },
+                  "Title": {
+                    "type": "string",
+                    "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/add_braintrust_user_to_prediction": {
+      "post": {
+        "tags": [
+          "Prediction"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "addBraintrustUserToPrediction",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "PredictionID": {
+                  "type": "string",
+                  "example": "09366b84-bd33-11eb-827d-06547b7882a8"
+                },
+                "BrainTrustUsers": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Sanket Jaydar"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/create_new_user": {
+      "post": {
+        "tags": [
+          "AdminLookup"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "createNewUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "UserNTID": {
+                  "type": "string",
+                  "example": "09366b84-bd33-11eb-827d-06547b7882a8"
+                },
+                "Description": {
+                  "type": "string",
+                  "example": "user create Descriptionnn"
+                },
+                "Designation": {
+                  "type": "string",
+                  "example": "Software Developer"
+                },
+                "UserDomain": {
+                  "type": "string",
+                  "example": "APAC"
+                },
+                "UserEmailAddress": {
+                  "type": "string",
+                  "example": "kiran.thakur@i2econsulting.com"
+                },
+                "UserName": {
+                  "type": "string",
+                  "example": "Kiran Thakur"
+                },
+                "UserRole": {
+                  "type": "string",
+                  "example": "Admin"
+                },
+                "CreatedByUserName": {
+                  "type": "string",
+                  "example": "32643c1c-79a4-11eb-9680-0afe9a292f4d"
+                },
+                "ModifiedByID": {
+                  "type": "string",
+                  "example": ""
+                },
+                "ModifiedByUserName": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/update_user": {
+      "post": {
+        "tags": [
+          "AdminLookup"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "updateUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "UserNTID": {
+                  "type": "string",
+                  "example": "KIRAN10"
+                },
+                "Description": {
+                  "type": "string",
+                  "example": "user update Descriptionnn"
+                },
+                "Designation": {
+                  "type": "string",
+                  "example": "Software Developer"
+                },
+                "UserDomain": {
+                  "type": "string",
+                  "example": "APAC"
+                },
+                "UserEmailAddress": {
+                  "type": "string",
+                  "example": "kiran.thakur@i2econsulting.com"
+                },
+                "UserName": {
+                  "type": "string",
+                  "example": "Kiran Thakur"
+                },
+                "UserRole": {
+                  "type": "string",
+                  "example": "Admin"
+                },
+                "UserId": {
+                  "type": "string",
+                  "example": "31d1e2e8-b248-11eb-8bdc-e884a5980962"
+                },
+                "ModifiedByUserName": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/get_all_user_list": {
+      "get": {
+        "tags": [
+          "AdminLookup"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "getAllUserList",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/get_all_admin_lookups": {
+      "get": {
+        "tags": [
+          "AdminLookup"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "getAllAdminLookups",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/get_lookup_by_category_id/{category_id}": {
+      "get": {
+        "tags": [
+          "AdminLookup"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "getLookupByCategoryId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "category_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/get_braintrust_users_reviews/{predictionId}": {
+      "get": {
+        "tags": [
+          "Prediction"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "getBraintrustUsersReviews",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "predictionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/built_data_for_chart": {
+      "post": {
+        "tags": [
+          "HomePage"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "builtDataForChart",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "IsPrediction": {
+                  "type": "string",
+                  "example": "True"
+                },
+                "UserName": {
+                  "type": "string",
+                  "example": "True"
+                },
+                "TimeFrame": {
+                  "type": "object",
+                  "properties": {
+                    "StartDate": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "EndDate": {
+                      "type": "string",
+                      "format": "date"
+                    }
+                  }
+                },
+                "Workstreams": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "Diseases": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/get_all_braintrust_user_list": {
+      "get": {
+        "tags": [
+          "AdminLookup"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "getAllBraintrustUserList",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/get_additional_search_attribute_by_search_id": {
+      "post": {
+        "tags": [
+          "Cipher"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "getAdditionalSearchAttributeBySearchId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "searchId": {
+                  "type": "string",
+                  "format": "int64",
+                  "example": 40617
+                },
+                "pageSize": {
+                  "type": "string",
+                  "format": "int64",
+                  "example": 10
+                },
+                "currentPage": {
+                  "type": "string",
+                  "format": "int64",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/download_file_s3": {
+      "post": {
+        "tags": [
+          "Cipher"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "downloadFileS3",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "S3_file_name": {
+                  "type": "string",
+                  "example": "S3_File_Name"
+                },
+                "file_name": {
+                  "type": "string",
+                  "example": "File_Name"
+                },
+                "prediction_Id": {
+                  "type": "string",
+                  "example": "6bb76e49-ba0d-11eb-90ac-06547b7882a8"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/delete_file_s3": {
+      "post": {
+        "tags": [
+          "Cipher"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "deleteFileS3",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "S3_file_name": {
+                  "type": "string",
+                  "example": "S3_File_Name"
+                },
+                "prediction_Id": {
+                  "type": "string",
+                  "example": "6bb76e49-ba0d-11eb-90ac-06547b7882a8"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/upload_file_s3": {
+      "post": {
+        "tags": [
+          "Cipher"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "uploadFileS3",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fileBytes": {
+                  "type": "string",
+                  "example": "fileBytes"
+                },
+                "fileName": {
+                  "type": "string",
+                  "example": "FileName"
+                },
+                "upload_user_name": {
+                  "type": "string",
+                  "example": "upload_user_name"
+                },
+                "prediction_Id": {
+                  "type": "string",
+                  "example": "6bb76e49-ba0d-11eb-90ac-06547b7882a8"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/add_update_lookup": {
+      "post": {
+        "tags": [
+          "AdminLookup"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "addUpdateLookup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "LookupCategoryId": {
+                  "type": "string",
+                  "example": "10007755-863d-11eb-99ed-06547b7882a8"
+                },
+                "LookupCategoryName": {
+                  "type": "string",
+                  "example": "Workstream_Test"
+                },
+                "LookupId": {
+                  "type": "string",
+                  "example": ""
+                },
+                "LookupValue": {
+                  "type": "string",
+                  "example": "Retroactive"
+                },
+                "LookupName": {
+                  "type": "string",
+                  "example": ""
+                },
+                "UserName": {
+                  "type": "string",
+                  "example": "Kiran"
+                },
+                "IsActive": {
+                  "type": "string",
+                  "example": "Y"
+                },
+                "Diseases": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Alopecia Areata"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    },
+    "/revoke_braintrust_review": {
+      "post": {
+        "tags": [
+          "Prediction"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "operationId": "revokeBraintrustReview",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "PredictionID": {
+                  "type": "string",
+                  "example": "10007755-863d-11eb-99ed-06547b7882a8"
+                },
+                "BrainTrustReviewUsersName": {
+                  "type": "string",
+                  "example": "Akshata Chhatre"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": "You do not have necessary permissions for the resource"
+          },
+          "500": {
+            "description": "Token is not provided"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Common200": {
+      "type": "object",
+      "required": [
+        "msg"
+      ],
+      "description": "Success msg.",
+      "properties": {
+        "msg": {
+          "type": "string",
+          "example": "Success msg."
+        }
+      }
+    },
+    "LoginResponce": {
+      "type": "object",
+      "description": "Success msg.",
+      "properties": {
+        "UserId": {
+          "type": "string",
+          "example": "32643c1c-79a4-11eb-9680-0afe9a292f4d"
+        },
+        "UserNTID": {
+          "type": "string",
+          "example": "GOSWAG01"
+        },
+        "DeviceRegistered": {
+          "type": "string",
+          "example": "Not Registered"
+        },
+        "DeviceToken": {
+          "type": "string",
+          "example": ""
+        },
+        "EndPointARN": {
+          "type": "string",
+          "example": ""
+        },
+        "UserRole": {
+          "type": "string",
+          "example": "Admin"
+        },
+        "IsActive": {
+          "type": "string",
+          "example": "Y"
+        },
+        "UserDomain": {
+          "type": "string",
+          "example": "APAC"
+        },
+        "Description": {
+          "type": "string",
+          "example": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus. Vestibulum justo, nec condimentum neque sapien placerat ante."
+        },
+        "UserEmailAddress": {
+          "type": "string",
+          "example": "Govind.Goswami@pfizer.com"
+        },
+        "Designation": {
+          "type": "string",
+          "example": "Web Designer I"
+        },
+        "UserName": {
+          "type": "string",
+          "example": "Govind Goswami"
+        },
+        "jwt_token": {
+          "type": "string",
+          "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc2VyTlRJRCI6IkdPU1dBRzAxIiwiZXhwIjoxNjIzNzA2NzQ0fQ._oyGCTsrpXLxP9jrCQkDqWutO2azjw7uop5GPTU_DFE"
+        }
+      }
+    },
+    "AppLoginResponce": {
+      "type": "object",
+      "description": "Success msg.",
+      "properties": {
+        "TopicARN": {
+          "type": "string",
+          "example": "arn:aws:sns:us-east-1:337409462071:ews-iOS-CHHATA-DEV"
+        },
+        "UserId": {
+          "type": "string",
+          "example": "32623c1c-55a4-11eb-9680-0afe9a292f4d"
+        },
+        "UserNTID": {
+          "type": "string",
+          "example": "CHHATA"
+        },
+        "DeviceRegistered": {
+          "type": "string",
+          "example": "Registered"
+        },
+        "DeviceToken": {
+          "type": "string",
+          "example": "f9e0a27af0e0c3af747ae24f6abbbb2b45a607cc230a0dcdd8553c7b0d83a373"
+        },
+        "EndPointARN": {
+          "type": "string",
+          "example": "arn: aws: sns: us - east - 1: 337409462071: endpoint / APNS_SANDBOX / EWS - iOS / 9 dc3af67 - f1f3 - 3980 - a8ed - ebcb4826f40e"
+        },
+        "UserRole": {
+          "type": "string",
+          "example": "BrainTrust"
+        },
+        "UserDomain": {
+          "type": "string",
+          "example": "APAC"
+        },
+        "Description": {
+          "type": "string",
+          "example": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.Proin risus.Praesent lectus.Vestibulum quam sapien, varius ut, blandit non, interdum in , ante.Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio."
+        },
+        "UserEmailAddress": {
+          "type": "string",
+          "example": "Akshata.Chhatre @pfizer.com"
+        },
+        "Designation": {
+          "type": "string",
+          "example": "Web Designer"
+        },
+        "UserName": {
+          "type": "string",
+          "example": "Akshata Chhatre"
+        },
+        "jwt_token": {
+          "type": "string",
+          "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJVc2VyTlRJRCI6IkNISEFUQSIsImV4cCI6MTYyMTUzODY4NX0.FsNSMEAUdyPSWngRd91dECc88OUTV15lfNMSXtsfmec"
+        }
+      }
+    },
+    "getAllPredictionResponce": {
+      "type": "object",
+      "description": "Success msg.",
+      "properties": {
+        "Categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ImpactScore": {
+          "type": "string",
+          "example": ""
+        },
+        "ModifiedByID": {
+          "type": "string",
+          "example": "32643c1c-79a4-11eb-9680-0afe9a292f4d"
+        },
+        "OpportunityScore": {
+          "type": "string",
+          "example": ""
+        },
+        "ModifiedDate": {
+          "type": "string",
+          "example": "2021-05-17 00:30:06.287064"
+        },
+        "ThreatScore": {
+          "type": "string",
+          "example": ""
+        },
+        "ModifiedByUserName": {
+          "type": "string",
+          "example": "SYSTEM"
+        },
+        "Draft": {
+          "type": "string",
+          "example": {}
+        },
+        "BrierScore": {
+          "type": "string",
+          "example": "NA"
+        },
+        "PredictionStatus": {
+          "type": "string",
+          "example": "Completed"
+        },
+        "SyntheticThreatScore": {
+          "type": "string",
+          "example": "NA"
+        },
+        "Title": {
+          "type": "string",
+          "example": "testing prediction for save as "
+        },
+        "CreatedDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2021 - 05 - 12 11: 07: 55.998729 "
+        },
+        "Retroactivity": {
+          "type": "string",
+          "example": ""
+        },
+        "PredictionType": {
+          "type": "string",
+          "example": []
+        },
+        "Authors": {
+          "type": "string",
+          "example": []
+        },
+        "Probability": {
+          "type": "string",
+          "example": ""
+        },
+        "DescriptionPlain": {
+          "type": "string",
+          "example": ""
+        },
+        "Companies": {
+          "type": "string",
+          "example": []
+        },
+        "IsNewDraftAvailable": {
+          "type": "string",
+          "example": "False"
+        },
+        "Diseases": {
+          "type": "string",
+          "example": []
+        },
+        "CreatedByID": {
+          "type": "string",
+          "example": "32643c1c-79a4-11eb-9680-0afe9a292f4d"
+        },
+        "ActivityStream": {
+          "type": "array",
+          "xml": {
+            "name": "ActivityStream",
+            "wrapped": true
+          },
+          "items": {
+            "$ref": "#/definitions/ActivityWTAuther"
+          }
+        }
+      }
+    },
+    "loginLoad": {
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "description": "Need code to get token.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "example": "Df9aAvUrutPlhWDV1daikVxrr_s57OhWxcoAAAAC"
+        }
+      }
+    },
+    "AppAuthLoad": {
+      "type": "object",
+      "required": [
+        "userntid",
+        "deviceToken"
+      ],
+      "description": "Need code to get token.",
+      "properties": {
+        "userntid": {
+          "type": "string",
+          "example": "CHHATA"
+        },
+        "deviceToken": {
+          "type": "string",
+          "example": "06f470810d1f92b836012a03a4bdd1350e0180a76f77b75a69013414ed177f8b"
+        }
+      }
+    },
+    "CreatePredictionLoad": {
+      "type": "object",
+      "required": [
+        "ActivityStream",
+        "Authors"
+      ],
+      "description": "Need code to get token.",
+      "properties": {
+        "ActivityStream": {
+          "type": "array",
+          "xml": {
+            "name": "ActivityStream",
+            "wrapped": true
+          },
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
+        },
+        "Authors": {
+          "type": "array",
+          "xml": {
+            "name": "ActivityStream",
+            "wrapped": true
+          },
+          "items": {
+            "$ref": "#/definitions/Authors"
+          }
+        },
+        "BrierScore": {
+          "type": "string",
+          "example": "NA"
+        },
+        "Categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Companies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "CreatedByNTID": {
+          "type": "string",
+          "example": "GOSWAG01"
+        },
+        "CreatedByID": {
+          "type": "string",
+          "example": "32643c1c-79a4-11eb-9680-0afe9a292f4d"
+        },
+        "CreatedByUserName": {
+          "type": "string",
+          "example": "Govind Goswami"
+        },
+        "Description": {
+          "type": "string",
+          "example": "Kiran test data aa"
+        },
+        "DescriptionPlain": {
+          "type": "string"
+        },
+        "Diseases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "FavouritedBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ImpactDescription": {
+          "type": "string",
+          "example": "Kiran Impact desc"
+        },
+        "ImpactScore": {
+          "type": "string",
+          "example": "low"
+        },
+        "ModifiedByID": {
+          "type": "string",
+          "example": "null"
+        },
+        "ModifiedByUserName": {
+          "type": "string",
+          "example": "null"
+        },
+        "OpportunityScore": {
+          "type": "string"
+        },
+        "PredictionAccuracy": {
+          "type": "string",
+          "example": "TBD"
+        },
+        "PredictionAttachments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "PredictionOutcome": {
+          "type": "string",
+          "example": "No"
+        },
+        "PredictionStatus": {
+          "type": "string",
+          "example": "Active"
+        },
+        "PredictionType": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Probability": {
+          "type": "string",
+          "example": "42"
+        },
+        "ProbabilityType": {
+          "type": "string",
+          "example": "Low"
+        },
+        "RelatedSearches": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Retroactivity": {
+          "type": "string",
+          "example": "Retroactive (No Outcome)"
+        },
+        "ReviewRatingAvg": {
+          "type": "string",
+          "example": "3.5"
+        },
+        "SyntheticOpportunityScore": {
+          "type": "string",
+          "example": "NA"
+        },
+        "SyntheticThreatScore": {
+          "type": "string",
+          "example": "NA"
+        },
+        "ThreatOpportunityType": {
+          "type": "string"
+        },
+        "ThreatScore": {
+          "type": "string"
+        },
+        "Title": {
+          "type": "string",
+          "example": "test"
+        },
+        "Workstreams": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "OutcomeNoLaterThan": {
+          "type": "object",
+          "properties": {
+            "StartDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "EndDate": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        }
+      }
+    },
+    "UpdatePredictionLoad": {
+      "type": "object",
+      "required": [
+        "ActivityStream",
+        "Authors"
+      ],
+      "description": "Need code to get token.",
+      "properties": {
+        "ActivityStream": {
+          "type": "array",
+          "xml": {
+            "name": "ActivityStream",
+            "wrapped": true
+          },
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
+        },
+        "Authors": {
+          "type": "array",
+          "xml": {
+            "name": "ActivityStream",
+            "wrapped": true
+          },
+          "items": {
+            "$ref": "#/definitions/Authors"
+          }
+        },
+        "BrierScore": {
+          "type": "string",
+          "example": "NA"
+        },
+        "Categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Companies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "CreatedByID": {
+          "type": "string",
+          "example": "32643c1c-79a4-11eb-9680-0afe9a292f4d"
+        },
+        "CreatedByUserName": {
+          "type": "string",
+          "example": "Govind Goswami"
+        },
+        "Description": {
+          "type": "string",
+          "example": "Kiran test data aa"
+        },
+        "Diseases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "FavouritedBy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ImpactDescription": {
+          "type": "string",
+          "example": "Kiran Impact desc"
+        },
+        "ImpactScore": {
+          "type": "string",
+          "example": "low"
+        },
+        "ModifiedByID": {
+          "type": "string",
+          "example": "null"
+        },
+        "ModifiedByUserName": {
+          "type": "string",
+          "example": "null"
+        },
+        "OpportunityScore": {
+          "type": "string"
+        },
+        "OutcomeNoLaterThan": {
+          "type": "object",
+          "properties": {
+            "StartDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "EndDate": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        },
+        "PredictionAccuracy": {
+          "type": "string",
+          "example": "TBD"
+        },
+        "PredictionAttachments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "PredictionOutcome": {
+          "type": "string",
+          "example": "No"
+        },
+        "PredictionStatus": {
+          "type": "string",
+          "example": "Active"
+        },
+        "PredictionType": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "PredictionReviews": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "PredictionID": {
+          "type": "string",
+          "example": "04600929-b33e-11eb-8786-06547b7882a8"
+        },
+        "Probability": {
+          "type": "string",
+          "example": "42"
+        },
+        "ProbabilityType": {
+          "type": "string",
+          "example": "Low"
+        },
+        "RelatedSearches": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Retroactivity": {
+          "type": "string",
+          "example": "Retroactive (No Outcome)"
+        },
+        "ReviewRatingAvg": {
+          "type": "string",
+          "example": "3.5"
+        },
+        "SyntheticOpportunityScore": {
+          "type": "string",
+          "example": "NA"
+        },
+        "SyntheticThreatScore": {
+          "type": "string",
+          "example": "NA"
+        },
+        "ThreatOpportunityType": {
+          "type": "string"
+        },
+        "ThreatScore": {
+          "type": "string"
+        },
+        "Title": {
+          "type": "string",
+          "example": "test"
+        },
+        "UrlReferences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "UrlLocation": {
+                "type": "string"
+              },
+              "UrlTitle": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "Workstreams": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "save_review_load": {
+      "type": "object",
+      "description": "Need code to get token.",
+      "properties": {
+        "PredictionID": {
+          "type": "string",
+          "example": "c06c2606-c2dc-11eb-8ccf-06547b7882a8"
+        },
+        "ReviewBy": {
+          "type": "string",
+          "example": "Sanket Jaydar"
+        },
+        "ReviewerId": {
+          "type": "string",
+          "example": "7895144-asadasd-asdd3d71725"
+        },
+        "ReviewerComment": {
+          "type": "string"
+        },
+        "ImpactScore": {
+          "type": "string",
+          "example": "High"
+        },
+        "ThreatScore": {
+          "type": "string",
+          "example": "4"
+        },
+        "OpportunityScore": {
+          "type": "string",
+          "example": "6"
+        }
+      }
+    },
+    "AddPredictionBookmarkLoad": {
+      "type": "object",
+      "description": "Need code to get token.",
+      "properties": {
+        "PredictionID": {
+          "type": "string",
+          "example": "c06c2606-c2dc-11eb-8ccf-06547b7882a8"
+        },
+        "FavouritedUserName": {
+          "type": "string",
+          "example": "Sanket Jaydar"
+        },
+        "SetFavourited": {
+          "type": "string",
+          "example": true
+        }
+      }
+    },
+    "Activity": {
+      "type": "object",
+      "properties": {
+        "ActivityStreamType": {
+          "type": "string"
+        },
+        "ActivityStreamComment": {
+          "type": "string"
+        },
+        "LastActionBy": {
+          "type": "string"
+        },
+        "AuthorsList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "LastActionDate": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "ActivityWTAuther": {
+      "type": "object",
+      "properties": {
+        "ActivityStreamType": {
+          "type": "string"
+        },
+        "ActivityStreamComment": {
+          "type": "string"
+        },
+        "LastActionBy": {
+          "type": "string"
+        },
+        "LastActionDate": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "Authors": {
+      "type": "object",
+      "properties": {
+        "AuthorID": {
+          "type": "string"
+        },
+        "AuthorName": {
+          "type": "string"
+        },
+        "AuthorEmail": {
+          "type": "string"
+        },
+        "Companies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "PredictionType": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ModifiedDate": {
+          "type": "string",
+          "example": "2021-03-31 08:46:07.513146"
+        },
+        "PredictionAttachments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ThreatOpportunityType": {
+          "type": "string",
+          "example": "Opportunity"
+        },
+        "OutcomeNoLaterThan": {
+          "type": "object",
+          "properties": {
+            "StartDate": {
+              "type": "string",
+              "format": "date"
+            },
+            "EndDate": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        },
+        "Retroactivity": {
+          "type": "string",
+          "example": "Retroactive (No Outcome)"
+        },
+        "Workstreams": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "PredictionStatus": {
+          "type": "string",
+          "example": "SavedAsDraft"
+        },
+        "Categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ThreatScore": {
+          "type": "string",
+          "example": ""
+        },
+        "OpportunityScore": {
+          "type": "string",
+          "example": "3"
+        },
+        "Probability": {
+          "type": "string",
+          "example": "55"
+        },
+        "ImpactDescription": {
+          "type": "string",
+          "example": "test data a"
+        },
+        "Diseases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ModifiedByUserName": {
+          "type": "string",
+          "example": "John Doe"
+        },
+        "ImpactScore": {
+          "type": "string",
+          "example": "low"
+        },
+        "MonetaryImpact": {
+          "type": "string",
+          "example": "null,"
+        },
+        "PredictionAccuracy": {
+          "type": "string",
+          "example": "TBD"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "x-access-token",
+      "in": "header"
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Pfizer API",
+    "url": "http://swagger.io"
+  }
+}
